@@ -6,44 +6,25 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * This class is responsible for handling i/o of the player
- * 
- * @author khaled
+ *  responsible for handling player's input output 
  *
  */
 public class PlayerHandler {
 
 	// movement animation images
-	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
-	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
-
-	Image imgw;
-	Image imga;
-	Image imgs;
-	Image imgd;
-
+	Image imgW1,imgA1,imgS1,imgD1,imgW2,imgA2,imgS2,imgD2;
+	Image imgw,imga,imgs,imgd;
 	int imgSize = 40;
-
 	private boolean second = false; // used to swap between moving animtion, can be handelled better
-	double movement = 25;
-	double movementX = 22;
-
+	double movement = 50;
+	double movementX = 50;
 	Frog frog;
 
 	/**
-	 * This method sets up the player model by defining all sprites required for
-	 * movement
-	 * 
-	 * @param animal This is a passed reference of the player object
+	 * determine the image required for player movement
+	 * @param frog is a passed reference of the player object
 	 */
 	public PlayerHandler(Frog frog) {
-
 		this.frog = frog;
 
 		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
@@ -58,21 +39,16 @@ public class PlayerHandler {
 	}
 
 	/**
-	 * This method runs with the game timer and its in charge for checking keyboard
-	 * input and arranging appropriate actions once input is detected ands it
-	 * changes animal sprites accordingly since it is a constantly running function
-	 * it also calls the checkintersections function
+	 * checks keyboard input and does the actions once input is detected
 	 * 
-	 * @see Animal#checkIntersections()
 	 */
 	public void checkcontrol() {
 		frog.checkIntersections();
 
-		// System.out.println(points);
-		frog.setOnKeyPressed(new EventHandler<KeyEvent>() { // when key is first pressed
+		frog.setOnKeyPressed(new EventHandler<KeyEvent>() { 
 			public void handle(KeyEvent event) {
 				if (frog.noMove) {
-					// do nothing
+					
 				} else {
 					if (second) {
 						imgw = imgW1;
@@ -88,21 +64,21 @@ public class PlayerHandler {
 					}
 
 					if (event.getCode() == KeyCode.W) {
-						frog.move(0, -movement * 2);
+						frog.move(0, -movement);
 						frog.setImage(imgw);
-						second = !second;
+						second = false;
 					} else if (event.getCode() == KeyCode.A) {
-						frog.move(-movementX * 2, 0);
+						frog.move(-movementX , 0);
 						frog.setImage(imga);
-						second = !second;
+						second = false;
 					} else if (event.getCode() == KeyCode.S) {
-						frog.move(0, movement * 2);
+						frog.move(0, movement);
 						frog.setImage(imgs);
-						second = !second;
+						second = false;
 					} else if (event.getCode() == KeyCode.D) {
-						frog.move(movementX * 2, 0);
+						frog.move(movementX , 0);
 						frog.setImage(imgd);
-						second = !second;
+						second = false;
 					}
 				}
 			}
