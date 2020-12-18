@@ -1,6 +1,5 @@
 package p4_group_8_repo;
 
-import java.util.Random;
 import Actor.Actor;
 import World.MyStage;
 import java.util.ArrayList;
@@ -15,25 +14,19 @@ import Objects.ATurtle;
 import Objects.WetTurtle;
 
 /**
- * This class is in charge of initializing all obstacles the player faces in the
- * game
- * 
- * @author khaled
+ * this class is in charge of initializing all obstacles 
  *
  */
 public class Objects {
 
 	MyStage background;
-
 	public ArrayList<Actor> digits;
-
 	ArrayList<Actor> func = new ArrayList<Actor>();
 	ArrayList<End> ends = new ArrayList<End>();
 	double bonus = 0;
 
 	/**
-	 * The constructor does nothing but instatiate a list that keeps track of all
-	 * digits on stage
+	 * keeps track of all digits on stage
 	 */
 	public Objects() {
 
@@ -42,19 +35,7 @@ public class Objects {
 	}
 
 	/**
-	 * This method returns the bonus speed each obstacle should get according to the
-	 * level reached Every level the speed increases by 0.05
-	 */
-	private void getbonus() {
-		for (int i = 0; i < background.lvl; i++) {
-			bonus = bonus + 0.05;
-
-		}
-	}
-
-	/**
-	 * This method instantiates cars and trucks and adds them to to the func array
-	 * which stores the game objects
+	 * this method adds the cars and trucks into the array which stores the objects
 	 */
 	private void addobstacles() {
 
@@ -72,8 +53,7 @@ public class Objects {
 	}
 
 	/**
-	 * This method instantiates the 5 end holes in the game and adds them to the
-	 * game background
+	 * this method adds the 4 goal in the game to the game background
 	 */
 	private void addends() {
 		background.add(new End());
@@ -84,8 +64,7 @@ public class Objects {
 	}
 
 	/**
-	 * This method instantiates the logs and adds them to the func array which
-	 * contains the objects
+	 * this method adds the logs into the array which stores the objects
 	 */
 	private void addlogs() {
 
@@ -103,8 +82,7 @@ public class Objects {
 	}
 
 	/**
-	 * This method instantiates the turtles and wet turtles and adds them to the
-	 * func arryay which stores the game objects
+	 * this method adds the turtles into the array which stores the objects
 	 */
 	private void addturtles() {
 
@@ -118,24 +96,13 @@ public class Objects {
 	}
 
 	/**
-	 * This is the main method of this class and its called to from other classes to
-	 * instantiate all objects in the scene
+	 * its called all other classes to add all objects in the scene
+	 * @param background is the root node of the scene, all objects need to be attached to it as a child
 	 * 
-	 * @param background This is the root node of the scene, all objects need to be
-	 *                   attached to it as a child
-	 * 
-	 *                   after it runs the instantiating functions, it shuffles the
-	 *                   func array which will contain all moving objects and add
-	 *                   them to the background afterwards
 	 */
 	public void addobjects(MyStage background) {
 		this.background = background;
-		// sets background image |
-
-		getbonus();
-
-		// adding objects to background makes them children nodes
-
+	
 		addturtles();
 		addlogs();
 		addends();
@@ -158,7 +125,7 @@ public class Objects {
 	}
 
 	/**
-	 * This method instatiates the score and hiscore labels on top of the screen
+	 * this method adds the labels on top of the screen
 	 */
 	private void addlabels() {
 		background.add(new Labels("file:src/resources/HighScoreimage.png", 140, 180, 10));
@@ -166,14 +133,9 @@ public class Objects {
 	}
 
 	/**
-	 * This method manages the digits used for the score and highscore on top of the
-	 * screen
-	 * 
-	 * @param n      This is the number to be displayed as digits
-	 * @param ishigh This boolean tells the method if it should place the digits
-	 *               under score or under highscore(if true then under highscore) it
-	 *               also deleted all current score digits from the screen before
-	 *               updating them
+	 * this method manages the digits used for the score and high score on top of the screen
+	 * @param n is the number to be displayed as digits
+	 * @param ishigh tells the method if it should update the digits under score or under high score
 	 */
 	public void setNumber(int n, boolean ishigh) { // set n as digits on screen
 
@@ -183,21 +145,21 @@ public class Objects {
 
 		}
 		Actor temp;
-		int shift = 0;// shifts positions for bigger digits
+		int shift = 0;
 		int x = 400;
 		if (ishigh) {
 			x = 270;
 		}
 		while (n > 0) {
 			int d = n / 10;
-			int k = n - d * 10;// calculations to check number digit by digit
+			int k = n - d * 10;
 			n = d;
 			temp = new Digit(k, 30, x - shift, 40);
 			if (!ishigh) {
 				digits.add(temp);
 			}
-			background.addfront(temp);// 360 is end of number, works backwards
-			shift += 30;// move back 30 more pixels
+			background.addfront(temp);
+			shift += 30;
 		}
 	}
 
