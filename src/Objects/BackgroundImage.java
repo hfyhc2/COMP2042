@@ -2,7 +2,10 @@ package Objects;
 
 import Actor.*;
 import javafx.scene.image.Image;
-
+/**
+ * shis class is used for the background image 
+ *
+ */
 public class BackgroundImage extends Actor {
 
 	@Override
