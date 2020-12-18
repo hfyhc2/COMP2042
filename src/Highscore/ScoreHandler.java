@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 import p4_group_8_repo.Frog;
 
+/**
+ * This class handles the score
+ *
+ */
 public class ScoreHandler {
 
 	public ArrayList<ScoreType> scores;
@@ -21,8 +25,7 @@ public class ScoreHandler {
 	public File file;
 
 	/**
-	 * The constructor checks for the text file , and creates one if it doesnt
-	 * exist, it also calls the readscores function to initialise the scoreboard
+	 * checks for the score file, if missing makes score file
 	 */
 	public ScoreHandler() {
 
@@ -44,18 +47,13 @@ public class ScoreHandler {
 		readscores();
 
 	}
-
 	/**
-	 * This function writes new data into the file, it works by first adding the new
-	 * score to the scores list. and then writing all entities of the list to the
-	 * file in the correct format
-	 * 
-	 * @param username the username the player wants to use
-	 * @param score    the score the player has accumulated
-	 * @param level    the level the player has reached it also checks for an
-	 *                 existing username, and if it exists and is lower than the new
-	 *                 score then it replaces the lower score with the higher score
+	 * This function writes new data into the file
+	 * @param username is the user name of the player
+	 * @param score is the score the player has have
+	 * @param level is the level the player has reached
 	 */
+	
 	public void writescores(String username, int score, int level) {
 		boolean found = false;
 
@@ -90,7 +88,7 @@ public class ScoreHandler {
 	}
 
 	/**
-	 * This function reads the score data from a text file and stores in in an array
+	 * this function reads data and stores it in an array 
 	 */
 	public void readscores() {
 		int second = 1;
@@ -121,21 +119,15 @@ public class ScoreHandler {
 			e.printStackTrace();
 		}
 	}
-
 	/**
-	 * A public method to get the scores
-	 * 
-	 * @return an array containing the player scores
+	 * method to get the scores
 	 */
+	
 	public ArrayList getscore() {
 		return (scores);
 	}
 
-	/**
-	 * A function that gets the hiscore
-	 * 
-	 * @return the highest score
-	 */
+	
 	public int gethiscore() {
 		int hi = 0;
 		for (int i = 0; i < scores.size(); i++) {
