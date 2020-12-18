@@ -1,5 +1,10 @@
 package Actor;
 
+/**
+ * this functionality is for objects that moves
+ *
+ */
+
 public class ActorMove implements ActorInterface {
 	@Override
 	public void actor(Actor actor, long now) {
