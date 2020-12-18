@@ -2,19 +2,19 @@ package Objects;
 
 import Actor.*;
 import javafx.scene.image.Image;
-
+/**
+ * this class moves the log
+ *
+ */
 public class Log extends Actor {
 
 	int dim = 100;
-
+	
 	/**
-	 * instatiates log and sends it to world to check a free strip to place it on in
-	 * the game using the checknextfree method
-	 * 
-	 * @param imageLink the location of the log image
-	 * @param xpos      the starting x coordinate
-	 * @param s         the speed the log moves in
-	 * @see World#checknextfree
+	 * sends the log to class world to check if there is a space for it
+	 * @param imageLink is the location of the log image
+	 * @param xpos is the starting x coordinate
+	 * @param s is the speed the log 
 	 */
 	public Log(String imageLink, int size, int xpos, int ypos, double s) {
 		actor = new ActorMove();
@@ -36,7 +36,11 @@ public class Log extends Actor {
 		speed = s;
 
 	}
-
+	
+	/**
+	 * allow the player to move with the log
+	 * @return the speed of the log
+	 */
 	public double getspeed() {
 		return speed;
 	}
