@@ -4,24 +4,24 @@ import Highscore.ScoreHandler;
 import World.MyStage;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
-
+/**
+ *  starts and ends the game session
+ *
+ */
 public class GameManager {
-
+	
 	public MyStage background;
 	Stage PS;
 	public Frog frog;
 	Objects objects;
 	ViewGame VG;
 	ScoreHandler SH;
-
 	AnimationTimer timer;
-
 	PlayerHandler PH;
 
 	/**
-	 * the constructor gets reference to all necessary classes
-	 * 
-	 * @param VM a reference to the view manager which has all the references needed
+	 * gets reference to all the necessary classes
+	 * @param VG is a reference for ViewGame
 	 */
 	public GameManager(ViewGame VG) {
 		this.background = VG.background;
@@ -29,15 +29,14 @@ public class GameManager {
 		this.objects = VG.objects;
 		this.VG = VG;
 		this.SH = VG.SH;
-
 		start();
 
 	}
 
 	/**
-	 * This sets up the game scene it does the following tasks: creates player
-	 * object animal created player controller and attaches the player to it starts
-	 * the music timer adds the initial score and hiscore
+	 * creates player object frog and attach itself to player handler
+	 * starts the music 
+	 * update the initial score and high score
 	 */
 	public void start() {
 		frog = new Frog();
@@ -51,33 +50,32 @@ public class GameManager {
 	}
 
 	/**
-	 * this method starts a game timer for player related functions
+	 * starts the timer for player related functions
 	 */
 	private void createTimer() {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				PH.checkcontrol();
-				if (frog.changeScore()) { // if theres been a change in teh score
+				if (frog.changeScore()) { 
 					objects.setNumber(frog.getPoints(), false);
 				}
-				if (frog.getStop()) { // stops everything and alerts player if all 5 ends are filled
+				if (frog.getStop()) { 
 					StopFunctions();
 				}
 			}
 
 		};
 	}
-
+	
 	/**
-	 * This method runs when the game ends and it stops all game functions from
-	 * living and calls the next action(either to get next level or the win screen)
+	 * stops all game functions and shows win screen
 	 */
 	private void StopFunctions() {
 		background.stopMusic();
 		background.stop();
 		timer.stop();
-		VG.createwin();
+		VG.createwinscreen();
 	}
 
 }
