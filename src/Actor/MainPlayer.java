@@ -1,19 +1,17 @@
 package Actor;
 
 import javafx.scene.image.Image;
-
 /**
- * This functionality is for the player
- * 
- * @author khaled
+ * This functionality is for player
  *
  */
+
 public class MainPlayer implements ActorInterface {
 
 	/**
-	 * This method calls restrict movement method that keeps the player within the
-	 * screen, and it also checks for any death triggers and loads the correct
-	 * images for the death animations
+	 * This method calls  the restrict movement method to stops player from going off screen 	
+	 * and it checks for the death triggers and loads the animations
+	 * 
 	 */
 	@Override
 	public void actor(Actor actor, long now) {
@@ -36,6 +34,9 @@ public class MainPlayer implements ActorInterface {
 		}
 
 	}
+	/**
+	 * stops player from going off screen
+	 */
 
 	@Override
 	public void restrictmovement(Actor actor) {
