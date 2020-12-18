@@ -1,9 +1,7 @@
 package Highscore;
 
 /**
- * This class is a datatype used for storing the player score
- * 
- * @author khaled
+ * This class is the data type for player score
  *
  */
 public class ScoreType {
@@ -13,12 +11,11 @@ public class ScoreType {
 	public int Level;
 
 	/**
-	 * The constructor
-	 * 
-	 * @param Username the username the player wants to use
-	 * @param score    the score the player has accumulated
-	 * @param Level    the level the player has reached
-	 */
+     * The constructor
+     * @param username is the user name of the player
+	 * @param score is the score the player has have
+	 * @param level is the level the player has reached
+     */
 	public ScoreType(String Username, int score, int Level) {
 
 		this.Username = Username;
