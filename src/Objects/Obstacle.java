@@ -2,10 +2,19 @@ package Objects;
 
 import Actor.*;
 import javafx.scene.image.Image;
-
+/**
+ * this class moves the cars 
+ *
+ */
 public class Obstacle extends Actor {
-
-	// initialize object
+	
+	/**
+	 * assigns the cars to a position
+	 * @param imageLink the sprite of the car
+	 * @param s speed of car
+	 * @param w width of car image
+	 * @param h height of car image
+	 */
 	public Obstacle(String imageLink, int xpos, int s, int w, int h) {
 		actor = new ActorMove();
 		int ypos = 0;
