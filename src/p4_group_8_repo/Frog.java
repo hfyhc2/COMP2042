@@ -16,26 +16,48 @@ import Objects.ATurtle;
 import Objects.WetTurtle;
 
 /**
- * Objects of this class represent the player
+ * the player's objects
  * 
- * @author khaled
  *
  */
 
 public class Frog extends Actor {
-
-	int spawnposy = 700; // spawn position
-	int end = 0; // counter for end goals, max 5
-	public boolean noMove = false; // locks player movement
-	public boolean changeScore = false; // theres been a chage in the score that should be added
-	int carD = 0; // animation counter
-	double w = 800;// stores highest point player reached
+	
+	/**
+	 * player's spawn point
+	 */
+	int spawnposy = 700; 
+	
+	/**
+	 * to check if all goals is reached
+	 */
+	int end = 0; 
+	
+	/**
+	 * locks player movement
+	 */
+	public boolean noMove = false; 
+	
+	/**
+	 * check if the score need to be updated 
+	 */
+	public boolean changeScore = false; 
+	
+	/**
+	 * the animation timer
+	 */
+	int carD = 0; 
+	
+	/**
+	 * used to check highest lane player reached
+	 */
+	double w = 800;
 
 	/**
-	 * This is the constructor of the animal class it sets the player sprite and the
-	 * spawn position
+	 *  sets the player sprite and the spawn point
 	 */
-	public Frog() { // init player
+	public Frog() { 
+		setX(250);
 		actor = new MainPlayer();
 		imgSize = 40;
 		setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true));
@@ -44,25 +66,22 @@ public class Frog extends Actor {
 	}
 
 	/**
-	 * This method is called to by the PlayerController script constantly to check
-	 * for any collisions between the player and other objects
-	 * 
-	 * @see {@link PlayerController}
+	 * to check for any collisions between the player and  objects
 	 */
 	protected void checkIntersections() {
 
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) { // if player hits car
+		if (getIntersectingObjects(Obstacle.class).size() >= 1) { 
 			carDeath = true;
 		}
 
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) { // move player with log
+		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) { 
 			move(getIntersectingObjects(Log.class).get(0).getspeed(), 0);
 
-		} else if (getIntersectingObjects(ATurtle.class).size() >= 1 && !noMove) { // move player with turtle
+		} else if (getIntersectingObjects(ATurtle.class).size() >= 1 && !noMove) { 
 			move(getIntersectingObjects(ATurtle.class).get(0).getspeed(), 0);
 		}
 
-		// if player on turtle and turtle is sunk then kill player
+		
 		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 				waterDeath = true;
@@ -71,51 +90,44 @@ public class Frog extends Actor {
 			}
 		}
 
-		// if intersecting with the end hole
+		
 		else if (getIntersectingObjects(End.class).size() >= 1) {
 
-			// if end hole is already activated, undo score additoin || can be more
-			// effecient
+			
 			if (!getIntersectingObjects(End.class).get(0).isActivated()) {
 
 				setHoleActive();
-				w = 800; // resets highest level to minimum
+				w = 800; 
 				resetPlayerPos();
 
 			}
 		}
 
-		else if (getY() < 200) { // if you are not on any object after this point u ded :)
+		else if (getY() < 390 ) { 
 			waterDeath = true;
 		}
 	}
 
 	/**
-	 * This method handles the event where the player reaches an end point, it will
-	 * add points and set the appropriate end hole to active
+	 * add points and set the appropriate goal to active when player reaches the goal
 	 */
 	private void setHoleActive() {
 		// add score
 		points += 50;
 		changeScore = true;
 
-		getIntersectingObjects(End.class).get(0).setEnd(); // sets hole to activated
+		getIntersectingObjects(End.class).get(0).setEnd(); 
 		end++;
 
 	}
 
 	/**
-	 * This is a death handler method, it plays the animation according to the type
-	 * of death, which is checked in the ActPlayer class it uses the game timer to
-	 * go through death sprites
-	 * 
-	 * @param now this is the game timer it also handles anything required for
-	 *            player death, such as point deduction and position reset
+	 * plays the animation according to the type of death, handles point deduction and position reset
+	 * @param now this is the game timer
 	 */
 	public void handledeath(long now) {
-		noMove = true;// lock movement
-
-		// play death animation
+		noMove = true;
+		
 		if ((now) % 11 == 0) {
 			carD++;
 		}
@@ -134,19 +146,17 @@ public class Frog extends Actor {
 			}
 		}
 		if (carD == 5) {
-			// reset position player
+			
 			resetPlayerPos();
 
-			// reset death triggers
 			waterDeath = false;
 			carDeath = false;
 
-			// reset animation
 			carD = 0;
-			setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true)); // reset player
-																									// sprite
-			noMove = false; // unlock movement
-			if (points > 50) { // deduct points if possible
+			setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true)); 
+																								
+			noMove = false; 
+			if (points > 50) { 
 				points -= 50;
 				changeScore = true;
 			}
@@ -154,39 +164,29 @@ public class Frog extends Actor {
 	}
 
 	/**
-	 * This method resets the player position to spawn point
+	 *  resets player position to spawn point
 	 */
 	private void resetPlayerPos() {
-		setX(300);
+		setX(250);
 		setY(spawnposy);
 	}
 
-	/**
-	 * This is a public method that can be used to check if the player won depending
-	 * on how many end points it reached its called to from SessionHandler
-	 * 
-	 * @return boolean whether the player met winning conditions or not
-	 * @see sessionHandler
-	 */
+	
 	public boolean getStop() {
 		return end == 4;
 	}
 
 	/**
-	 * This is a public method that returns the number of points the player have
-	 * gathered
-	 * 
-	 * @return points, an integer representing the player's points
+	 * returns the number of points the player have gathered
+	 * @return points is an integer representing the player's points
 	 */
-	public int getPoints() {// sends points to calsses that requested
+	public int getPoints() {
 		return (points);
 	}
 
 	/**
-	 * This is a public method that can be called to check whether theres been a
-	 * change in the score
-	 * 
-	 * @return a boolean that indiciates if the score has changed
+	 * check if the score have change
+	 * @return a is a boolean that shows if the score has changed
 	 */
 	public boolean changeScore() {
 		if (changeScore) {
