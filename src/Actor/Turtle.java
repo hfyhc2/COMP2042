@@ -13,7 +13,7 @@ public class Turtle implements ActorInterface {
 	/**
 	 * aside from movement, this method is also in charge of movement animations
 	 */
-	public void act(Actor actor, long now) {
+	public void actor(Actor actor, long now) {
 
 		restrictmovement(actor);
 
@@ -47,11 +47,4 @@ public class Turtle implements ActorInterface {
 			actor.setX(600);
 
 	}
-
-	@Override
-	public void actor(Actor actor, long now) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
